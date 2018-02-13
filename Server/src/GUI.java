@@ -180,21 +180,28 @@ public class GUI
 			try {
 				
 				final int PORT = 444;
-				final String HOST = "memes";
+				final String HOST = "memes"; // can be domain name or ip
 				
 				Socket SOCK = new Socket(HOST,PORT);
 				System.out.println("you are connected to" + HOST);
 				
-				//ChatClient = new Client1(SOCK);
+				chat = new Client1(SOCK); // still need to build the constructor for the client
+				
+				PrintWriter OUT  = new PrintWriter(SOCK.getOutputStream());
+				OUT.println(Usr); // send users name
+				OUT.flush(); // flush stream
+				
+				Thread X = new Thread(chat); // building thread 
+				X.start();
+			}
+			catch(Exception X)
+			{
+				System.out.print(X);
+				JOptionPane.showMessageDialog(null, "the server is not responding");
+				System.exit(0);
 			}
 		}
 		
-//----------------------------------------------------------------------------------------		
-		
-		public static void MainWindow_Action()
-		{
-			System.out.println("pass");
-		}
 		
 //----------------------start logon button implementation---------------------------------
 		
@@ -212,7 +219,7 @@ public class GUI
 			
 		}
 		
-		public static void ACTION_B_ENTER()
+		public static void ACTION_B_ENTER() 
 		{
 			if(!TF_UsernameBox.getText().equals("")) //checks if logon is null
 			{
@@ -231,5 +238,54 @@ public class GUI
 			{JOptionPane.showMessageDialog(null, "please enter a name");} // if logon is null, prompt for a new one
 		}
 //-------------------------logon button end------------------------------------------------
+
+		public static void MainWindow_Action() // adding functions to other buttons
+		{
+			B_SEND.addActionListener( // maps to send 
+					new java.awt.event.ActionListener()
+					{
+						public void actionPerformed(java.awt.event.ActionEvent evt)
+						{ ACTION_B_SEND(); }	
+					}
+			);
+			
+			B_DISCONNECT.addActionListener( //maps to disconnect
+					new java.awt.event.ActionListener()
+					{
+						public void actionPerformed(java.awt.event.ActionEvent evt)
+						{ ACTION_B_DISCONNECT(); }	
+					}
+			);
+			
+			B_CONNECT.addActionListener( // I LLOOOOOOVEEEEE BITCOOOOONNNENEEEEECCCT
+					new java.awt.event.ActionListener()
+					{
+						public void actionPerformed(java.awt.event.ActionEvent evt)
+						{ ACTION_B_CONNECT(); }	
+					} // maps to connect
+			);
+			
+			B_HELP.addActionListener( // I LLOOOOOOVEEEEE BITCOOOOONNNENEEEEECCCT
+					new java.awt.event.ActionListener()
+					{
+						public void actionPerformed(java.awt.event.ActionEvent evt)
+						{ ACTION_B_HELP(); }	
+					} // maps to connect
+			);
+			
+			B_ABOUT.addActionListener( // I LLOOOOOOVEEEEE BITCOOOOONNNENEEEEECCCT
+					new java.awt.event.ActionListener()
+					{
+						public void actionPerformed(java.awt.event.ActionEvent evt)
+						{ ACTION_B_ABOUT(); }	
+					} // maps to connect
+			);
+		
+		}
+//------------------------------------------------------------------------------------------		
+		
+		
+		
+		
 		
 }
