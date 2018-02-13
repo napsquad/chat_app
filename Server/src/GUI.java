@@ -200,6 +200,25 @@ public class GUI
 			
 		}
 		
+		public static void ACTION_B_ENTER()
+		{
+			if(!TF_UsernameBox.getText().equals(""))
+			{
+				Usr = TF_UsernameBox.getText().trim();
+				L_LoggedInAsBox.setText(Usr);
+				Server1.Users.add(Usr);
+				main.setTitle(Usr + "'s chat");
+				LoginWindow.setVisible(false);
+				B_SEND.setEnabled(true);
+				B_DISCONNECT.setEnabled(true);
+				B_CONNECT.setEnabled(false);
+				//Connect();
+				
+			}
+			else
+			{JOptionPane.showMessageDialog(null, "please enter a name");}
+		}
+		
 		
 		
 }
