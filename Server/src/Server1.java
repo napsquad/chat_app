@@ -56,25 +56,4 @@ public class Server1
 		 }
 		
 	}
-	
-	
-	public void run() throws Exception
-	{
-		final int port  = 9000;
-		
-		ServerSocket SRVSOCK = new ServerSocket(port); // sets up server socket
-		Socket SOCK = SRVSOCK.accept(); // makes socket accept new connections
-		InputStreamReader IR = new InputStreamReader(SOCK.getInputStream()); // reads input stream from socket
-		BufferedReader BR = new BufferedReader(IR); // reads in input from previously created socket
-		
-		String MESSAGE = BR.readLine();
-		System.out.println(MESSAGE);
-		
-		if (MESSAGE != null)
-		{
-			PrintStream PS = new PrintStream(SOCK.getOutputStream());
-			PS.println("message Received");
-		}
-		
-	}
 }
