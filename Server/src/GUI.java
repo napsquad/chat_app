@@ -284,8 +284,36 @@ public class GUI
 		}
 //------------------------------------------------------------------------------------------		
 		
+		public static void ACTION_B_SEND()
+		{
+			if(!TF_MESSAGE.getText().equals("")){
+				chat.SEND(TF_MESSAGE.getText()); // send method from CLient1
+				TF_MESSAGE.requestFocus(); // after send, focus goes to button
+				// we bring it back using requestFocus
+				
+			}
+			
+		}
 		
+		public static void ACTION_B_DISONNECT()
+		{
+			try
+			{
+				client.DISCONNECT();
+			}
+			catch(Exception Y ) { Y.printStackTrace(); }
+		}
 		
+		public static void ACTION_B_HELP()
+		{
+			JOptionPane.showMessageDialog(null, "chat beta 2017");
+		}
 		
+		public static void ACTION_B_ABOUT()
+		{
+			JOptionPane.showMessageDialog(null, "A beta chat client"
+					+ "/n further implementation coming soon");
+			
+		}
 		
 }
