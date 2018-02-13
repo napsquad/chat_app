@@ -1,6 +1,8 @@
 import java.io.*;
 import java.net.*;
 import java.util.*;
+
+import javax.security.auth.x500.X500Principal;
 import javax.swing.JOptionPane;
 
 public class Server1
@@ -24,6 +26,10 @@ public class Server1
 				
 				AddUserName(Accepts);  // adds user to the list of users
 				
+				Server_return CHAT = new Server_return(Accepts); // accepts socket object, builds a server return object for every new client
+				Thread X = new Thread(CHAT); // create new thread
+				X.start(); // starts subprocess
+				
 			}
 		}
 		catch(Exception X) {System.out.println(X);} // catches port not found error
@@ -44,8 +50,8 @@ public class Server1
 		 {
 			 Socket temp = (Socket) Server1.Connections.get(i-1);
 			 PrintWriter OUT = new PrintWriter(temp.getOutputStream());
-			 OUT.println(Users);
-			 OUT.flush();
+			 OUT.println("#?!" + Users); // prefaces connection with these symbols for later use
+			 OUT.flush(); // sends the data on its way to the server
 			 
 		 }
 		
