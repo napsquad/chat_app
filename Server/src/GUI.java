@@ -153,7 +153,7 @@ public class GUI
 			B_SEND.setEnabled(false);
 			B_DISCONNECT.setEnabled(false);
 			B_DISCONNECT.setText("JOIN");
-			B_CONNECT.setEnabled(false));
+			B_CONNECT.setEnabled(false);
 			B_DISCONNECT.setText("LEAVE");
 			
 		}
@@ -179,8 +179,8 @@ public class GUI
 		{
 			try {
 				
-				final int PORT = 444;
-				final String HOST = "memes"; // can be domain name or ip
+				final int PORT = 9001;
+				final String HOST = "localhost"; // can be domain name or ip
 				
 				Socket SOCK = new Socket(HOST,PORT);
 				System.out.println("you are connected to" + HOST);
@@ -261,7 +261,7 @@ public class GUI
 					new java.awt.event.ActionListener()
 					{
 						public void actionPerformed(java.awt.event.ActionEvent evt)
-						{ ACTION_B_CONNECT(); }	
+						{ BuildLoginWindow(); }	
 					} // maps to connect
 			);
 			
