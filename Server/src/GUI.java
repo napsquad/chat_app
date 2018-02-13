@@ -2,8 +2,10 @@ import java.io.*;
 
 import java.net.*;
 import java.util.*;
-import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class GUI 
 {
@@ -173,7 +175,7 @@ public class GUI
 			LoginWindow.setVisible(true);
 		}
 		
-		public static void connect()
+		public static void Connect()
 		{
 			try {
 				
@@ -187,38 +189,47 @@ public class GUI
 			}
 		}
 		
+//----------------------------------------------------------------------------------------		
+		
 		public static void MainWindow_Action()
 		{
 			System.out.println("pass");
 		}
 		
+//----------------------start logon button implementation---------------------------------
+		
 		public static void Login_Action()
 		{
-		B_ENTER.addActionListener(null);
-		
 			
+			B_ENTER.addActionListener
+			(
+				new java.awt.event.ActionListener()
+				{ 
+					public void actionPerformed(ActionEvent e)
+						{ACTION_B_ENTER();}			
+				}
+			);
 			
 		}
 		
 		public static void ACTION_B_ENTER()
 		{
-			if(!TF_UsernameBox.getText().equals(""))
+			if(!TF_UsernameBox.getText().equals("")) //checks if logon is null
 			{
-				Usr = TF_UsernameBox.getText().trim();
-				L_LoggedInAsBox.setText(Usr);
-				Server1.Users.add(Usr);
-				main.setTitle(Usr + "'s chat");
+				Usr = TF_UsernameBox.getText().trim(); // set user to what is entered
+				L_LoggedInAsBox.setText(Usr);		// show their name on window
+				Server1.Users.add(Usr);				// adds user to jlist when logged in
+				main.setTitle(Usr + "'s chat");		// change  windows jlabel to show their name
 				LoginWindow.setVisible(false);
-				B_SEND.setEnabled(true);
-				B_DISCONNECT.setEnabled(true);
-				B_CONNECT.setEnabled(false);
-				//Connect();
+				B_SEND.setEnabled(true); 			// once conncted, allow sending
+				B_DISCONNECT.setEnabled(true); 		//once connected, allow disconnection
+				B_CONNECT.setEnabled(false); 		// shouldnt be able to connected after youre already connected
+				Connect();
 				
 			}
 			else
-			{JOptionPane.showMessageDialog(null, "please enter a name");}
+			{JOptionPane.showMessageDialog(null, "please enter a name");} // if logon is null, prompt for a new one
 		}
-		
-		
+//-------------------------logon button end------------------------------------------------
 		
 }
