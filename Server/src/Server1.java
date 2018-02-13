@@ -50,8 +50,8 @@ public class Server1
 		 {
 			 Socket temp = (Socket) Server1.Connections.get(i-1);
 			 PrintWriter OUT = new PrintWriter(temp.getOutputStream());
-			 OUT.println("#?!" + Users); // prefaces connection with these symbols for later use
-			 OUT.flush(); // sends the data on its way to the server
+			 OUT.println("#?!" + Users); // prefaces command with these symbols for later use in populating jlist object
+			 OUT.flush(); // sends the data on its way to the server, needs to be called whenever we are sending data
 			 
 		 }
 		
