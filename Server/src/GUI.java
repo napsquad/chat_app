@@ -1,8 +1,9 @@
 import java.io.*;
+
 import java.net.*;
 import java.util.*;
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.*;
 
 public class GUI 
 {
@@ -66,32 +67,22 @@ public class GUI
 			main.setSize(500,320);
 			main.getContentPane().setLayout(null);
 			
-			B_SEND.setBackground(new java.awt.Color(0,0,255));
-			B_SEND.setForeground(new java.awt.Color(255,255,255));
 			B_SEND.setText("SEND");
 			main.getContentPane().add(B_SEND);
 			B_SEND.setBounds(260, 40,81,25);
 			
-			B_DISCONNECT.setBackground(new java.awt.Color(0,0,255));
-			B_DISCONNECT.setForeground(new java.awt.Color(255,255,255));
 			B_DISCONNECT.setText("leave");
 			main.getContentPane().add(B_DISCONNECT);
 			B_DISCONNECT.setBounds(10,40,110,25);
 			
-			B_CONNECT.setBackground(new java.awt.Color(0,0,255));
-			B_CONNECT.setForeground(new java.awt.Color(255,255,255));
 			B_CONNECT.setText("join");
 			main.getContentPane().add(B_CONNECT);
 			B_CONNECT.setBounds(120,40,110,25);
 			
-			B_HELP.setBackground(new java.awt.Color(0,0,255));
-			B_HELP.setForeground(new java.awt.Color(255,255,255));
 			B_HELP.setText("HELP");
 			main.getContentPane().add(B_HELP);
 			B_HELP.setBounds(420,40,75,25);
 			
-			B_ABOUT.setBackground(new java.awt.Color(0,0,255));
-			B_ABOUT.setForeground(new java.awt.Color(255,255,255));
 			B_ABOUT.setText("ABOUT");
 			main.getContentPane().add(B_ABOUT);
 			B_ABOUT.setBounds(340,40,110,25);
@@ -157,10 +148,10 @@ public class GUI
 		
 		public static void Initialize()
 		{
-			B_SEND.setEnabled(true);
-			B_DISCONNECT.setEnabled(true);
+			B_SEND.setEnabled(false);
+			B_DISCONNECT.setEnabled(false);
 			B_DISCONNECT.setText("JOIN");
-			B_CONNECT.setEnabled(true);
+			B_CONNECT.setEnabled(false));
 			B_DISCONNECT.setText("LEAVE");
 			
 		}
@@ -194,6 +185,19 @@ public class GUI
 				
 				//ChatClient = new Client1(SOCK);
 			}
+		}
+		
+		public static void MainWindow_Action()
+		{
+			System.out.println("pass");
+		}
+		
+		public static void Login_Action()
+		{
+		B_ENTER.addActionListener(null);
+		
+			
+			
 		}
 		
 		
