@@ -265,7 +265,7 @@ public class GUI
 					} // maps to connect
 			);
 			
-			B_HELP.addActionListener( // I LLOOOOOOVEEEEE BITCOOOOONNNENEEEEECCCT
+			B_HELP.addActionListener(
 					new java.awt.event.ActionListener()
 					{
 						public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -273,7 +273,7 @@ public class GUI
 					} // maps to connect
 			);
 			
-			B_ABOUT.addActionListener( // I LLOOOOOOVEEEEE BITCOOOOONNNENEEEEECCCT
+			B_ABOUT.addActionListener( 
 					new java.awt.event.ActionListener()
 					{
 						public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -295,11 +295,11 @@ public class GUI
 			
 		}
 		
-		public static void ACTION_B_DISONNECT()
+		public static void ACTION_B_DISCONNECT()
 		{
 			try
 			{
-				client.DISCONNECT();
+				chat.DISCONNECT();
 			}
 			catch(Exception Y ) { Y.printStackTrace(); }
 		}
