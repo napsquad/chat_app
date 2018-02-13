@@ -1,26 +1,47 @@
 import java.io.*;
 import java.net.*;
+import java.util.*;
+
+import javax.swing.JOptionPane;
 
 public class Client1 
 {
-	public static void main(String[] args) throws Exception
+	//globals
+	
+	Socket SOCK;
+	Scanner INPUT;
+	Scanner SEND = new Scanner(System.in);
+	PrintWriter OUT;
+
+	
+	public Client1(Socket X)
 	{
-		Client1 CLIENT = new Client1();
-		CLIENT.run();
+		this.SOCK = X;
 	}
 	
-	public void run() throws Exception
+	public void run()
 	{
-		Socket SOCK = new Socket("localhost", 9000);
-		PrintStream PS = new PrintStream(SOCK.getOutputStream());
-		PS.println("hello from the client");
-		
-		InputStreamReader IR = new InputStreamReader(SOCK.getInputStream());
-		BufferedReader BR = new BufferedReader(IR);
-		
-		String MESSAGE = BR.readLine();
-		System.out.println(MESSAGE);
-		
+		try
+		{
+			try {
+				INPUT = new Scanner(SOCK.getInputStream());
+				OUT = new PrintWriter(SOCK.getOutputStream());
+				OUT.flush();
+				CheckStream();
+			}
+			finally {
+				SOCK.close();
+			}
+		}
+		catch(Exception X) { System.out.print(X); }
 	}
-
+	
+	
+	public void DISCONNECT() throws IOException
+	{
+		OUT.println(GUI.Usr + " Has Disconnected."); // broadcast who disconnected
+		OUT.flush(); // flush output stream
+		SOCK.close(); // close socket
+		JOptionPane.showMessageDialog(null, "you Disconncted"); // tell user they have disconnected
+	}
 }
