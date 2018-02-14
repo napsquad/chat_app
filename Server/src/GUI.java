@@ -58,16 +58,47 @@ public class GUI
 			main.setLocation(220, 180);
 			main.setResizable(false);
 			ConfigureMainWindow();
-			//MainWindow_Action();
+			MainWindow_Action();
 			main.setVisible(true);
 			
 		}
 //------------------------------------------------------------------------------------------
+		public static void Connect()
+		{
+			try {
+				
+				final int PORT = 9001;
+				final String HOST = "localhost"; // can be domain name or ip
+				
+				Socket SOCK = new Socket(HOST,PORT);
+				System.out.println("you are connected to" + HOST);
+				
+				chat = new Client1(SOCK); // still need to build the constructor for the client
+				
+				PrintWriter OUT  = new PrintWriter(SOCK.getOutputStream());
+				OUT.println(Usr); // send users name
+				OUT.flush(); // flush stream
+				
+				Thread X = new Thread(chat); // building thread 
+				X.start();
+			}
+			catch(Exception X)
+			{
+				System.out.print(X);
+				JOptionPane.showMessageDialog(null, "the server is not responding");
+				System.exit(0);
+			}
+		}
+		
+//------------------------------------------------------------------------------------------------------		
+		
 		public static void ConfigureMainWindow()
 		{
 			main.setBackground(new java.awt.Color(255,255,255));
 			main.setSize(500,320);
 			main.getContentPane().setLayout(null);
+			
+			B_ENTER.setText("ENTER");
 			
 			B_SEND.setText("SEND");
 			main.getContentPane().add(B_SEND);
@@ -77,7 +108,7 @@ public class GUI
 			main.getContentPane().add(B_DISCONNECT);
 			B_DISCONNECT.setBounds(10,40,110,25);
 			
-			B_CONNECT.setText("join");
+			B_CONNECT.setText("JOIN");
 			main.getContentPane().add(B_CONNECT);
 			B_CONNECT.setBounds(120,40,110,25);
 			
@@ -122,7 +153,7 @@ public class GUI
 			main.getContentPane().add(L_ONLINE);
 			L_ONLINE.setBounds(350,70,130,16);
 			
-			String[] TEST = {"USER1","USER2","USER3","USER4"};
+			String[] TEST = {""};
 			JL_ONLINE.setForeground(new java.awt.Color(0,0,255));
 			JL_ONLINE.setListData(TEST);
 			
@@ -153,7 +184,7 @@ public class GUI
 			B_SEND.setEnabled(false);
 			B_DISCONNECT.setEnabled(false);
 			B_DISCONNECT.setText("JOIN");
-			B_CONNECT.setEnabled(false);
+			B_CONNECT.setEnabled(true);
 			B_DISCONNECT.setText("LEAVE");
 			
 		}
@@ -171,36 +202,10 @@ public class GUI
 			
 			LoginWindow.add(P_Login);
 			
-			//Login_Action();
+			Login_Action();
 			LoginWindow.setVisible(true);
 		}
 		
-		public static void Connect()
-		{
-			try {
-				
-				final int PORT = 9001;
-				final String HOST = "localhost"; // can be domain name or ip
-				
-				Socket SOCK = new Socket(HOST,PORT);
-				System.out.println("you are connected to" + HOST);
-				
-				chat = new Client1(SOCK); // still need to build the constructor for the client
-				
-				PrintWriter OUT  = new PrintWriter(SOCK.getOutputStream());
-				OUT.println(Usr); // send users name
-				OUT.flush(); // flush stream
-				
-				Thread X = new Thread(chat); // building thread 
-				X.start();
-			}
-			catch(Exception X)
-			{
-				System.out.print(X);
-				JOptionPane.showMessageDialog(null, "the server is not responding");
-				System.exit(0);
-			}
-		}
 		
 		
 //----------------------start logon button implementation---------------------------------
@@ -212,7 +217,7 @@ public class GUI
 			(
 				new java.awt.event.ActionListener()
 				{ 
-					public void actionPerformed(ActionEvent e)
+					public void actionPerformed(java.awt.event.ActionEvent e)
 						{ACTION_B_ENTER();}			
 				}
 			);
