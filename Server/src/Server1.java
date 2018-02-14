@@ -13,7 +13,7 @@ public class Server1
 	public static void main(String[] args) throws IOException
 	{
 		try {
-			final int port  = 9000;// defines port for server to operate on
+			final int port  = 9003;// defines port for server to operate on
 			ServerSocket SERVER = new ServerSocket(port); // creates server port
 			System.out.println("looking for Connections"); // tells user that we are looking for connections
 			
@@ -44,7 +44,7 @@ public class Server1
 		Scanner input = new Scanner(x.getInputStream()); // gets input from socket
 		String UserName = input.nextLine(); //gets username from the first line 
 		
-		 Users.add(UserName); // add username to user arrry
+		 Users.add(UserName); // add username to user array
 		 
 		 for (int i = 1; i<=Server1.Connections.size();i++) // updates everyones jlist object so you know who is online
 		 {
