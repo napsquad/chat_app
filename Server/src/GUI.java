@@ -253,6 +253,29 @@ public class GUI
 			
 		}
 		
+		public static void TRADE_ACTION() // bind action to add trade button
+		{
+			
+			ADD_NEW_TRADE.addActionListener
+			(
+				new java.awt.event.ActionListener()
+				{ 
+					public void actionPerformed(java.awt.event.ActionEvent e)
+						{ACTION_TRADE_ENTER();}			// once add trade button is pressed, call the enter trade method
+				}
+			);
+			
+		}
+		
+		public static void ACTION_TRADE_ENTER()
+		{
+			
+			System.out.println("tested");
+			
+			
+			
+		}
+		
 		public static void ACTION_B_ENTER() 
 		{
 			if(!TF_UsernameBox.getText().equals("")) //checks if logon is null
@@ -340,13 +363,12 @@ public class GUI
 		
 		public static void ACTION_B_HELP()
 		{
-			JOptionPane.showMessageDialog(null, "chat beta 2017");
+			JOptionPane.showMessageDialog(null, "chat/trade pre-alpha 2017");
 		}
 		
 		public static void ACTION_B_ABOUT()
 		{
-			JOptionPane.showMessageDialog(null, "A beta chat client"
-					+ "/n further implementation coming soon");
+			JOptionPane.showMessageDialog(null, "A beta chat client further  trade implementation coming soon");
 			
 		}
 		
