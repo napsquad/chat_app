@@ -245,14 +245,20 @@ public class GUI
 		public static void BUILD_TRADE_WINDOW()
 		{
 			TRADE_WINDOW.setTitle("SET UP TRADE");
-			TRADE_WINDOW.setSize(400,100);
+			TRADE_WINDOW.setSize(400,150);
 			TRADE_WINDOW.setLocation(250,200);
-			TRADE_WINDOW.setResizable(false);
-			T_ADD = new JPanel();
-			T_ADD.add(ITEM1); // should be 2 Labels, item 1 and item 2
-			T_ADD.add(ITEM2); // should be 2 TF's SIDE 1 and SIDE 2
-			T_ADD.add(ADD_NEW_TRADE);
+			TRADE_WINDOW.setResizable(true);
 			
+			TRADE_WINDOW.add(ITEM1);
+			ITEM1.setBounds(35,10,150,20);
+			TRADE_WINDOW.add(ITEM2);
+			ITEM2.setBounds(185,10,150,20);
+			
+			
+			TRADE_WINDOW.getContentPane().add(TRADE_OBJ1);
+			TRADE_WINDOW.getContentPane().add(TRADE_OBJ2);
+			TRADE_OBJ1.setBounds(0,25,150,50);
+			TRADE_OBJ2.setBounds(250,25,150,50);
 			TRADE_WINDOW.add(T_ADD);
 			
 			//Login_Action();
@@ -277,24 +283,6 @@ public class GUI
 			
 		}
 		
-		public static void TRADE_ACTION() // bind action to add trade button
-		{
-			
-			ADD_NEW_TRADE.addActionListener
-			(
-				new java.awt.event.ActionListener()
-				{ 
-					public void actionPerformed(java.awt.event.ActionEvent e)
-						{BUILD_TRADE_WINDOW();}			// once add trade button is pressed, call the enter trade method
-				}
-			);
-			
-		}
-		
-		public static void TRADE_ENTER()
-		{
-			
-		}
 		
 		
 		public static void ACTION_B_ENTER() 
@@ -324,6 +312,7 @@ public class GUI
 		public static void MainWindow_Action() // adding functions to other buttons
 		{
 			
+				
 			B_SEND.addActionListener( 
 					new java.awt.event.ActionListener()
 					{
@@ -360,9 +349,18 @@ public class GUI
 					new java.awt.event.ActionListener()
 					{
 						public void actionPerformed(java.awt.event.ActionEvent evt)
-						{ ACTION_B_ABOUT(); }	
-					} // maps to about
+						{ ACTION_B_ABOUT(); }// binds about window to the about button	
+					} 
 			);
+				
+			ADD_NEW_TRADE.addActionListener(
+					new java.awt.event.ActionListener()
+					{ 
+						public void actionPerformed(java.awt.event.ActionEvent e)
+							{BUILD_TRADE_WINDOW();}			// once add trade button is pressed, call the enter trade method
+					}
+				);
+			
 		
 		}
 //--------------------------------------main window button defs end---------------------------------------------
