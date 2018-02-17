@@ -54,6 +54,10 @@ public class GUI
 		private static JLabel ITEM1 = new JLabel("ITEM 1");
 		private static JLabel ITEM2 = new JLabel("ITEM 2");
 		private static JPanel T_ADD = new JPanel();
+		
+		private static JRadioButton TO_TRADE = new JRadioButton("To Trade");
+		private static JRadioButton TO_WANT = new JRadioButton("To Want");
+		
 		    
 //--------------------------------------------------------------------------------------------
 		
@@ -245,15 +249,17 @@ public class GUI
 		public static void BUILD_TRADE_WINDOW()
 		{
 			TRADE_WINDOW.setTitle("SET UP TRADE");
-			TRADE_WINDOW.setSize(400,150);
+			TRADE_WINDOW.setSize(400,125);
 			TRADE_WINDOW.setLocation(250,200);
-			TRADE_WINDOW.setResizable(true);
-			
+			TRADE_WINDOW.setResizable(false);
 			TRADE_WINDOW.add(ITEM1);
 			ITEM1.setBounds(35,10,150,20);
 			TRADE_WINDOW.add(ITEM2);
-			ITEM2.setBounds(185,10,150,20);
+			ITEM2.setBounds(305,10,150,20);
 			
+			JPanel RadioPanel = new JPanel();
+			RadioPanel.add(TO_TRADE);
+			RadioPanel.add(TO_WANT);
 			
 			TRADE_WINDOW.getContentPane().add(TRADE_OBJ1);
 			TRADE_WINDOW.getContentPane().add(TRADE_OBJ2);
@@ -261,7 +267,14 @@ public class GUI
 			TRADE_OBJ2.setBounds(250,25,150,50);
 			TRADE_WINDOW.add(T_ADD);
 			
-			//Login_Action();
+			ButtonGroup choices = new ButtonGroup();
+			choices.add(TO_WANT);
+			choices.add(TO_TRADE);
+			
+			
+			TRADE_WINDOW.add(RadioPanel);
+			RadioPanel.setBounds(150,30,50,50);
+
 			TRADE_WINDOW.setVisible(true);
 		}
 		
