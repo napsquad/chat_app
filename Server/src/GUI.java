@@ -42,6 +42,13 @@ public class GUI
 		private static JLabel L_EnterUsername = new JLabel("Enter your username: ");
 		private static JPanel P_Login = new JPanel();
 		
+		
+		// trade window items
+		private static JLabel L_TRADE = new JLabel("TRADING POST");
+		public static JTextArea TRADE_POST_AREA = new JTextArea();
+		private static JScrollPane SP_TRADE_POST = new JScrollPane();
+		private static JButton ADD_NEW_TRADE = new JButton();
+		
 //--------------------------------------------------------------------------------------------
 		
 		public static void main(String args[])
@@ -54,9 +61,9 @@ public class GUI
 		public static void BuildMainWindow()
 		{
 			main.setTitle(Usr +"'s chat" );
-			main.setSize(450,500);
+			main.setSize(700,700);
 			main.setLocation(220, 180);
-			main.setResizable(false);
+			main.setResizable(true);
 			ConfigureMainWindow();
 			MainWindow_Action();
 			main.setVisible(true);
@@ -67,7 +74,7 @@ public class GUI
 		{
 			try {
 				
-				final int PORT = 9001;
+				final int PORT = 9000;
 				final String HOST = "localhost"; // can be domain name or ip
 				
 				Socket SOCK = new Socket(HOST,PORT);
@@ -95,7 +102,7 @@ public class GUI
 		public static void ConfigureMainWindow()
 		{
 			main.setBackground(new java.awt.Color(255,255,255));
-			main.setSize(500,320);
+			main.setSize(500,550);
 			main.getContentPane().setLayout(null);
 			
 			B_ENTER.setText("ENTER");
@@ -174,7 +181,29 @@ public class GUI
 			L_LoggedInAsBox.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0,0,255)));
 			main.getContentPane().add(L_LoggedInAsBox);
 			L_LoggedInAsBox.setBounds(340,17,150,20);
-				
+			
+//------------------------- TRADE POST Contents start----------------------------------------------------------------------------
+			TRADE_POST_AREA.setColumns(20);
+			TRADE_POST_AREA.setRows(40);
+			TRADE_POST_AREA.setForeground(new java.awt.Color(0,0,255));
+			TRADE_POST_AREA.setLineWrap(true);
+			TRADE_POST_AREA.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0,0,0)));
+			TRADE_POST_AREA.setBounds(10,300,470,150);
+			main.getContentPane().add(TRADE_POST_AREA);
+			
+			L_TRADE.setHorizontalAlignment(SwingConstants.CENTER);
+			L_TRADE.setFont(new java.awt.Font("Times New Roman",0,12));
+			L_TRADE.setForeground(new java.awt.Color(255,0,0));
+			L_TRADE.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0,0,255)));
+			main.getContentPane().add(TRADE_POST_AREA);
+			L_TRADE.setBounds(10,300,150,20);
+			
+			//private static JButton ADD_NEW_TRADE = new JButton();
+			ADD_NEW_TRADE.setText("ADD TRADE");
+			main.getContentPane().add(ADD_NEW_TRADE);
+			ADD_NEW_TRADE.setBounds(200,470,100,40);
+			
+//------------------------- TRADE POST Contents end----------------------------------------------------------------------------	
 		}		
 		
 //-------------------------------------------------------------------------------------------
