@@ -48,7 +48,13 @@ public class GUI
 		public static JTextArea TRADE_POST_AREA = new JTextArea();
 		private static JScrollPane SP_TRADE_POST = new JScrollPane();
 		private static JButton ADD_NEW_TRADE = new JButton();
-		
+		public static JFrame TRADE_WINDOW = new JFrame();
+		public static JTextField TRADE_OBJ1 = new JTextField();
+		public static JTextField TRADE_OBJ2 = new JTextField();
+		private static JLabel ITEM1 = new JLabel("ITEM 1");
+		private static JLabel ITEM2 = new JLabel("ITEM 2");
+		private static JPanel T_ADD = new JPanel();
+		    
 //--------------------------------------------------------------------------------------------
 		
 		public static void main(String args[])
@@ -206,7 +212,8 @@ public class GUI
 //------------------------- TRADE POST Contents end----------------------------------------------------------------------------	
 		}		
 		
-//-------------------------------------------------------------------------------------------
+		
+//--------------------------------------------------Window Building-------------------------------------------------------------
 		
 		public static void Initialize()
 		{
@@ -235,6 +242,23 @@ public class GUI
 			LoginWindow.setVisible(true);
 		}
 		
+		public static void BUILD_TRADE_WINDOW()
+		{
+			TRADE_WINDOW.setTitle("SET UP TRADE");
+			TRADE_WINDOW.setSize(400,100);
+			TRADE_WINDOW.setLocation(250,200);
+			TRADE_WINDOW.setResizable(false);
+			T_ADD = new JPanel();
+			T_ADD.add(ITEM1); // should be 2 Labels, item 1 and item 2
+			T_ADD.add(ITEM2); // should be 2 TF's SIDE 1 and SIDE 2
+			T_ADD.add(ADD_NEW_TRADE);
+			
+			TRADE_WINDOW.add(T_ADD);
+			
+			//Login_Action();
+			TRADE_WINDOW.setVisible(true);
+		}
+		
 		
 		
 //----------------------start logon button implementation---------------------------------
@@ -261,25 +285,22 @@ public class GUI
 				new java.awt.event.ActionListener()
 				{ 
 					public void actionPerformed(java.awt.event.ActionEvent e)
-						{ACTION_TRADE_ENTER();}			// once add trade button is pressed, call the enter trade method
+						{BUILD_TRADE_WINDOW();}			// once add trade button is pressed, call the enter trade method
 				}
 			);
 			
 		}
 		
-		public static void ACTION_TRADE_ENTER()
+		public static void TRADE_ENTER()
 		{
 			
-			System.out.println("tested");
-			
-			
-			
 		}
+		
 		
 		public static void ACTION_B_ENTER() 
 		{
 			if(!TF_UsernameBox.getText().equals("")) //checks if logon is null
-			{
+			{ 
 				Usr = TF_UsernameBox.getText().trim(); // set user to what is entered
 				L_LoggedInAsBox.setText(Usr);		// show their name on window
 				Server1.Users.add(Usr);				// adds user to jlist when logged in
@@ -294,23 +315,28 @@ public class GUI
 			else
 			{JOptionPane.showMessageDialog(null, "please enter a name");} // if logon is null, prompt for a new one
 		}
-//-------------------------logon button end------------------------------------------------
+//-------------------------logon button end-----------------------------------------------------------------
 
+		
+		
+//----------------------------------main button defs start---------------------------------------------------
+		
 		public static void MainWindow_Action() // adding functions to other buttons
 		{
-			B_SEND.addActionListener( // maps to send 
+			
+			B_SEND.addActionListener( 
 					new java.awt.event.ActionListener()
 					{
 						public void actionPerformed(java.awt.event.ActionEvent evt)
-						{ ACTION_B_SEND(); }	
+						{ ACTION_B_SEND(); }	// binds send action to send button
 					}
 			);
 			
-			B_DISCONNECT.addActionListener( //maps to disconnect
+			B_DISCONNECT.addActionListener( 
 					new java.awt.event.ActionListener()
 					{
 						public void actionPerformed(java.awt.event.ActionEvent evt)
-						{ ACTION_B_DISCONNECT(); }	
+						{ ACTION_B_DISCONNECT(); }// binds disconnect action to leave button	
 					}
 			);
 			
@@ -318,16 +344,16 @@ public class GUI
 					new java.awt.event.ActionListener()
 					{
 						public void actionPerformed(java.awt.event.ActionEvent evt)
-						{ BuildLoginWindow(); }	
-					} // maps to connect
+						{ BuildLoginWindow(); }//binds login window opening to connect button
+					} 
 			);
 			
 			B_HELP.addActionListener(
 					new java.awt.event.ActionListener()
 					{
 						public void actionPerformed(java.awt.event.ActionEvent evt)
-						{ ACTION_B_HELP(); }	
-					} // maps to connect
+						{ ACTION_B_HELP(); }	// binds opening help window to help button
+					} 
 			);
 			
 			B_ABOUT.addActionListener( 
@@ -335,12 +361,15 @@ public class GUI
 					{
 						public void actionPerformed(java.awt.event.ActionEvent evt)
 						{ ACTION_B_ABOUT(); }	
-					} // maps to connect
+					} // maps to about
 			);
 		
 		}
-//------------------------------------------------------------------------------------------		
+//--------------------------------------main window button defs end---------------------------------------------
+
 		
+		
+//---------------------------------------Button action methods--------------------------------------------------
 		public static void ACTION_B_SEND()
 		{
 			if(!TF_MESSAGE.getText().equals("")){
