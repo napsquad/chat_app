@@ -13,7 +13,7 @@ public class Server1
 	public static void main(String[] args) throws IOException
 	{
 		try {
-			final int port  = 9002;// defines port for server to operate on
+			final int port  = 9003;// defines port for server to operate on
 			ServerSocket SERVER = new ServerSocket(port); // creates server port
 			System.out.println("looking for Connections"); // tells user that we are looking for connections
 			
@@ -56,4 +56,12 @@ public class Server1
 		 }
 		
 	}
+	public static void ItemWriter(String Y) throws IOException
+	{
+		BufferedWriter writer = new BufferedWriter(new FileWriter("db.txt",true));
+		writer.append(" ");
+		writer.append(Y);
+		writer.close();
+	}
+	
 }
