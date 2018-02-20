@@ -85,7 +85,7 @@ public class GUI
 		{
 			try {
 				
-				final int PORT = 9000;
+				final int PORT = 9003;
 				final String HOST = "localhost"; // can be domain name or ip
 				
 				Socket SOCK = new Socket(HOST,PORT);
@@ -273,6 +273,12 @@ public class GUI
 			TRADE_WINDOW.add(Submit_control);
 			Submit_control.setBounds(200,200,75,100);
 
+			try {
+				SUBMIT_ITEM();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			TRADE_WINDOW.setVisible(true);
 		}
 		
@@ -301,13 +307,18 @@ public class GUI
 				new java.awt.event.ActionListener()
 				{
 					public void actionPerformed(java.awt.event.ActionEvent evt)
-					{SUBMIT_ITEM();}
+					{try {
+						SUBMIT_ITEM();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}}
 				}
 			);
 			
 		}
 		
-		public static void SUBMIT_ITEM()
+		public static void SUBMIT_ITEM() throws IOException
 		{
 			if(!(TRADE_OBJ1.getText().equals("") && TRADE_OBJ2.getText().equals("")))
 			{
