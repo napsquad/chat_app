@@ -294,11 +294,35 @@ public class GUI
 			
 		}
 		
+		public static void Item_Action()
+		{
+			SUBMIT_TRADE.addActionListener
+			(
+				new java.awt.event.ActionListener()
+				{
+					public void actionPerformed(java.awt.event.ActionEvent evt)
+					{SUBMIT_ITEM();}
+				}
+			);
+			
+		}
 		
+		public static void SUBMIT_ITEM()
+		{
+			if(!(TRADE_OBJ1.getText().equals("") && TRADE_OBJ2.getText().equals("")))
+			{
+				String Item1 = TRADE_OBJ1.getText(); // reads in first item from textbox
+				String Item2 = TRADE_OBJ2.getText(); // reads in second item from textbox
+				String FullTrade = (Item1 + " for " + Item2 + "/n"); // concatentates lines and creates new line for next input
+				
+				Server1.ItemWriter(FullTrade); // passed to server to pass to item
+			}
+			
+		}
 		
 		public static void ACTION_B_ENTER() 
 		{
-			if(!TF_UsernameBox.getText().equals("")) //checks if logon is null
+			if(!TF_UsernameBox.getText().equals("")) //checks if logon is not null
 			{ 
 				Usr = TF_UsernameBox.getText().trim(); // set user to what is entered
 				L_LoggedInAsBox.setText(Usr);		// show their name on window
