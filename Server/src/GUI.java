@@ -85,7 +85,7 @@ public class GUI
 		{
 			try {
 				
-				final int PORT = 9003;
+				final int PORT = 9005;
 				final String HOST = "localhost"; // can be domain name or ip
 				
 				Socket SOCK = new Socket(HOST,PORT);
@@ -273,12 +273,8 @@ public class GUI
 			TRADE_WINDOW.add(Submit_control);
 			Submit_control.setBounds(200,200,75,100);
 
-			try {
-				SUBMIT_ITEM();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				Item_Action();
+			 
 			TRADE_WINDOW.setVisible(true);
 		}
 		
@@ -322,9 +318,9 @@ public class GUI
 		{
 			if(!(TRADE_OBJ1.getText().equals("") && TRADE_OBJ2.getText().equals("")))
 			{
-				String Item1 = TRADE_OBJ1.getText(); // reads in first item from textbox
-				String Item2 = TRADE_OBJ2.getText(); // reads in second item from textbox
-				String FullTrade = (Item1 + " for " + Item2 + "/n"); // concatentates lines and creates new line for next input
+				String Item1 = TRADE_OBJ1.getText().trim(); // reads in first item from textbox
+				String Item2 = TRADE_OBJ2.getText().trim(); // reads in second item from textbox
+				String FullTrade = (Item1 + " for " + Item2); // concatentates lines and creates new line for next input
 				
 				Server1.ItemWriter(FullTrade); // passed to server to pass to item
 			}
@@ -374,7 +370,6 @@ public class GUI
 						{ ACTION_B_DISCONNECT(); }// binds disconnect action to leave button	
 					}
 			);
-			
 			B_CONNECT.addActionListener( // I LLOOOOOOVEEEEE BITCOOOOONNNENEEEEECCCT
 					new java.awt.event.ActionListener()
 					{
@@ -382,7 +377,6 @@ public class GUI
 						{ BuildLoginWindow(); }//binds login window opening to connect button
 					} 
 			);
-			
 			B_HELP.addActionListener(
 					new java.awt.event.ActionListener()
 					{
@@ -390,7 +384,6 @@ public class GUI
 						{ ACTION_B_HELP(); }	// binds opening help window to help button
 					} 
 			);
-			
 			B_ABOUT.addActionListener( 
 					new java.awt.event.ActionListener()
 					{
@@ -398,7 +391,6 @@ public class GUI
 						{ ACTION_B_ABOUT(); }// binds about window to the about button	
 					} 
 			);
-				
 			ADD_NEW_TRADE.addActionListener(
 					new java.awt.event.ActionListener()
 					{ 
@@ -406,13 +398,9 @@ public class GUI
 							{BUILD_TRADE_WINDOW();}			// once add trade button is pressed, call the enter trade method
 					}
 				);
-			
-		
 		}
 //--------------------------------------main window button defs end---------------------------------------------
-
-		
-		
+	
 //---------------------------------------Button action methods--------------------------------------------------
 		public static void ACTION_B_SEND()
 		{
@@ -420,11 +408,8 @@ public class GUI
 				chat.SEND(TF_MESSAGE.getText()); // send method from CLient1
 				TF_MESSAGE.requestFocus(); // after send, focus goes to button
 				// we bring it back using requestFocus
-				
 			}
-			
 		}
-		
 		public static void ACTION_B_DISCONNECT()
 		{
 			try
@@ -433,16 +418,13 @@ public class GUI
 			}
 			catch(Exception Y ) { Y.printStackTrace(); }
 		}
-		
 		public static void ACTION_B_HELP()
 		{
 			JOptionPane.showMessageDialog(null, "chat/trade pre-alpha 2017");
 		}
-		
 		public static void ACTION_B_ABOUT()
 		{
 			JOptionPane.showMessageDialog(null, "A beta chat client further  trade implementation coming soon");
-			
 		}
 		
 }
