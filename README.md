@@ -9,14 +9,18 @@ to do:
 	make buttons visible post initialize[x](fixed by removing color)
 	implement db structure(possibly sql/mongo) to hold pics[]
 	implement popup Trade window[x]
-		-get input from said window[]
-		-store input from said window in DB (offsite)?
+		-get input from said window[x]
+		-store input from said window in DB (offsite)?[x]
+			- storing in text file currently
+
+	implement popup search function[]
+		-return search results in bottom window pane[]
 
 	possibly allow users to enter the IP that they wish to connect to
 	via the "join" button" []
 
 	
-	implement user accounts[]
+	implement user accounts(add into server/port connect window)[]
 		-full logons or just setting names?[]
 		- verify users?[]
 		
