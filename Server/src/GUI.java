@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import java.util.regex.*;
 
 public class GUI 
 {
@@ -85,7 +86,7 @@ public class GUI
 		{
 			try {
 				
-				final int PORT = 9005;
+				final int PORT = 9000;
 				final String HOST = "localhost"; // can be domain name or ip
 				
 				Socket SOCK = new Socket(HOST,PORT);
@@ -213,9 +214,9 @@ public class GUI
 			ADD_NEW_TRADE.setText("ADD TRADE");
 			main.getContentPane().add(ADD_NEW_TRADE);
 			ADD_NEW_TRADE.setBounds(200,470,100,40);
-			
+		}	
 //------------------------- TRADE POST Contents end----------------------------------------------------------------------------	
-		}		
+				
 		
 		
 //--------------------------------------------------Window Building-------------------------------------------------------------
@@ -284,7 +285,6 @@ public class GUI
 		
 		public static void Login_Action()
 		{
-			
 			B_ENTER.addActionListener
 			(
 				new java.awt.event.ActionListener()
@@ -293,9 +293,7 @@ public class GUI
 						{ACTION_B_ENTER();}			
 				}
 			);
-			
 		}
-		
 		public static void Item_Action()
 		{
 			SUBMIT_TRADE.addActionListener
@@ -311,22 +309,28 @@ public class GUI
 					}}
 				}
 			);
-			
 		}
-		
 		public static void SUBMIT_ITEM() throws IOException
 		{
 			if(!(TRADE_OBJ1.getText().equals("") && TRADE_OBJ2.getText().equals("")))
 			{
 				String Item1 = TRADE_OBJ1.getText().trim(); // reads in first item from textbox
 				String Item2 = TRADE_OBJ2.getText().trim(); // reads in second item from textbox
-				String FullTrade = (Item1 + " for " + Item2); // concatentates lines and creates new line for next input
+				String AlphaCheck = (Item1 + Item2); // concatentates lines and creates new line for next input
 				
-				Server1.ItemWriter(FullTrade); // passed to server to pass to item
+				if(AlphaCheck.matches("[a-zA-Z0-9]+")==false || Item1.length() > 75 || Item2.length()>75 )
+						{
+					JOptionPane.showMessageDialog(null, "One or more item contains non-alphanumeric characters or are too long, please "
+							+ "revise entries and resubmit");
+						}
+				else
+				{
+					String FullTrade = (Usr + " wants " + Item1 + " for " + Item2);		
+					Server1.ItemWriter(FullTrade); // passed to server to pass to item
+				}
 			}
 			
 		}
-		
 		public static void ACTION_B_ENTER() 
 		{
 			if(!TF_UsernameBox.getText().equals("")) //checks if logon is not null
@@ -340,7 +344,6 @@ public class GUI
 				B_DISCONNECT.setEnabled(true); 		//once connected, allow disconnection
 				B_CONNECT.setEnabled(false); 		// shouldnt be able to connected after youre already connected
 				Connect();
-				
 			}
 			else
 			{JOptionPane.showMessageDialog(null, "please enter a name");} // if logon is null, prompt for a new one
@@ -352,9 +355,7 @@ public class GUI
 //----------------------------------main button defs start---------------------------------------------------
 		
 		public static void MainWindow_Action() // adding functions to other buttons
-		{
-			
-				
+		{	
 			B_SEND.addActionListener( 
 					new java.awt.event.ActionListener()
 					{
@@ -362,7 +363,6 @@ public class GUI
 						{ ACTION_B_SEND(); }	// binds send action to send button
 					}
 			);
-			
 			B_DISCONNECT.addActionListener( 
 					new java.awt.event.ActionListener()
 					{
@@ -420,11 +420,12 @@ public class GUI
 		}
 		public static void ACTION_B_HELP()
 		{
-			JOptionPane.showMessageDialog(null, "chat/trade pre-alpha 2017");
+			JOptionPane.showMessageDialog(null, "Each items must both be below 75 character individually and only contain Alphanumeric"
+					+ "characters");
 		}
 		public static void ACTION_B_ABOUT()
 		{
-			JOptionPane.showMessageDialog(null, "A beta chat client further  trade implementation coming soon");
+			JOptionPane.showMessageDialog(null, "An alpha build chat and trade client, search development in progress");
 		}
 		
 }
