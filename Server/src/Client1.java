@@ -52,7 +52,7 @@ public class Client1 implements Runnable
 			
 			if(MESSAGE.contains("#?!")) // detects server commands
 			{
-				String TEMP1 = MESSAGE.substring(12); // strips preamble
+				String TEMP1 = MESSAGE.substring(3); // strips preamble
 				TEMP1 =TEMP1.replace("[","");// surrounds command with brackets
 				TEMP1 = TEMP1.replace("]","");//	''
 				
