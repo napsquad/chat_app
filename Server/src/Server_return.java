@@ -5,8 +5,8 @@ import javax.swing.JOptionPane;
 
 public class Server_return implements Runnable{ // as a threaded object, this will automatically call run
 
-		// global varibles
-		Socket SOCK;				//global socket varible
+		// global variables
+		Socket SOCK;				//global socket variable
 		private Scanner INPUT;	// will be used to read in input
 		private PrintWriter OUT; // will be used to write to the socket
 		String MESSAGE = "";		// message declaration for later use
@@ -58,6 +58,7 @@ public class Server_return implements Runnable{ // as a threaded object, this wi
 						{return;}
 						
 						MESSAGE = INPUT.nextLine();
+						
 						System.out.println("client said: " + MESSAGE); // echos what client said in console
 						
 						for(int i = 1; i<=Server1.Connections.size(); i++)
@@ -78,8 +79,5 @@ public class Server_return implements Runnable{ // as a threaded object, this wi
 				}
 			}
 			catch(Exception x) {System.out.println(x);}
-		}
-		
-		
-		
+		}	
 }
