@@ -1,12 +1,6 @@
 import java.io.*;
-
 import java.net.*;
-import java.util.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
-import java.util.regex.*;
 
 public class GUI 
 {
@@ -86,7 +80,7 @@ public class GUI
 		{
 			try {
 				
-				final int PORT = 9000;
+				final int PORT = 9001;
 				final String HOST = "localhost"; // can be domain name or ip
 				
 				Socket SOCK = new Socket(HOST,PORT);
@@ -195,21 +189,29 @@ public class GUI
 			L_LoggedInAsBox.setBounds(340,17,150,20);
 			
 //------------------------- TRADE POST Contents start----------------------------------------------------------------------------
+			
 			TRADE_POST_AREA.setColumns(20);
 			TRADE_POST_AREA.setRows(40);
 			TRADE_POST_AREA.setForeground(new java.awt.Color(0,0,255));
 			TRADE_POST_AREA.setLineWrap(true);
 			TRADE_POST_AREA.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0,0,0)));
-			TRADE_POST_AREA.setBounds(10,300,470,150);
-			main.getContentPane().add(TRADE_POST_AREA);
+			TRADE_POST_AREA.setEditable(false);
+			
+			SP_TRADE_POST.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+			SP_TRADE_POST.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+			SP_TRADE_POST.setViewportView(TRADE_POST_AREA);
+			main.getContentPane().add(SP_TRADE_POST);
+			SP_TRADE_POST.setBounds(10,300,470,150);
+			
 			
 			L_TRADE.setHorizontalAlignment(SwingConstants.CENTER);
 			L_TRADE.setFont(new java.awt.Font("Times New Roman",0,12));
 			L_TRADE.setForeground(new java.awt.Color(255,0,0));
 			L_TRADE.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0,0,255)));
-			main.getContentPane().add(TRADE_POST_AREA);
 			L_TRADE.setBounds(10,300,150,20);
+
 			
+
 			//private static JButton ADD_NEW_TRADE = new JButton();
 			ADD_NEW_TRADE.setText("ADD TRADE");
 			main.getContentPane().add(ADD_NEW_TRADE);
