@@ -60,9 +60,14 @@ public class Client1 implements Runnable
 				
 				GUI.JL_ONLINE.setListData(CurrentUsers);	//sets list data from newly created array			
 			}
+			else if(MESSAGE.substring(0, 6) == "!SEARCH")
+			{
+				GUI.	TRADE_POST_AREA.append(MESSAGE.substring(7)); // if we get a search return, shave off the !search and add to trade area box
+			}
+			
 			else 
 			{
-				GUI.TA_CONVERSATION.append(MESSAGE+"\n"); //echos message to text area
+				GUI.TA_CONVERSATION.append(MESSAGE+"\n"); // if the message is not a !SEARCH echo message to text area
 			}
 			
 		}

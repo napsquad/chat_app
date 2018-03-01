@@ -59,6 +59,18 @@ public class Server_return implements Runnable{ // as a threaded object, this wi
 						
 						MESSAGE = INPUT.nextLine();
 						
+						if(MESSAGE.substring(0, 6) == "!result") // if user wishes to search for an item in a database
+						{
+							search_database(MESSAGE, OUT);
+							
+						}
+						else if(MESSAGE.substring(0, 7) == "!additem")
+						{
+							add_item(MESSAGE);
+						}
+						
+						else
+						{
 						System.out.println("client said: " + MESSAGE); // echos what client said in console
 						
 						for(int i = 1; i<=Server1.Connections.size(); i++)
@@ -68,6 +80,7 @@ public class Server_return implements Runnable{ // as a threaded object, this wi
 							TEMP_OUT.println(MESSAGE); // cycles through all sockets in the list and sends the sent message to all of them
 							TEMP_OUT.flush(); // flushes out data stream
 							System.out.println("sent to:"+  TEMP_SOCK.getLocalAddress().getHostName()); // what admin will see
+						}
 						}
 						
 					}
@@ -79,5 +92,34 @@ public class Server_return implements Runnable{ // as a threaded object, this wi
 				}
 			}
 			catch(Exception x) {System.out.println(x);}
-		}	
+		}
+		
+		public static void add_item(String Y) throws IOException
+		{
+			BufferedWriter writer = new BufferedWriter(new FileWriter("db.txt",true));
+			writer.append("\n");
+			writer.append(Y);
+			writer.close();
+			return;
+			
+		}
+		public static void search_database(String Y, PrintWriter X) throws IOException // passes two items to the serach method
+		{
+			BufferedReader reader = new BufferedReader(new FileReader("db.txt")); // open file for reading 
+			
+			while(reader.readLine() != null) // while file has a line to show
+			{
+				String line = reader.readLine(); // store new line in String line
+				if(line.contains(Y)) // checks if the line we are looking at contains the item we are searching for 
+				{
+					X.println("!SEARCH" + line); // if the line does contain this varible then we send append the SEARCH keyword and send to the client
+					X.flush(); // flush data to client
+				}
+				
+			}
+			reader.close();
+			
+			return;
+			
+		}
 }

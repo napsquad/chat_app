@@ -80,7 +80,7 @@ public class GUI
 		{
 			try {
 				
-				final int PORT = 9001;
+				final int PORT = 9002;
 				final String HOST = "localhost"; // can be domain name or ip
 				
 				Socket SOCK = new Socket(HOST,PORT);
@@ -327,7 +327,7 @@ public class GUI
 						}
 				else
 				{
-					String FullTrade = (Usr + " wants " + Item1 + " for " + Item2);		
+					String FullTrade = ( "!additem " + Usr + " wants " + Item1 + " for " + Item2);		
 					Server1.ItemWriter(FullTrade); // passed to server to pass to item
 				}
 			}
