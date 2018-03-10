@@ -324,11 +324,19 @@ public class GUI
 						{
 					JOptionPane.showMessageDialog(null, "One or more item contains non-alphanumeric characters or are too long, please "
 							+ "revise entries and resubmit");
+					TRADE_OBJ1.requestFocus();
+					TRADE_OBJ2.requestFocus();
+					TRADE_OBJ1.setText("");
+					TRADE_OBJ2.setText("");
 						}
 				else
 				{
-					String FullTrade = ( "!additem " + Usr + " wants " + Item1 + " for " + Item2);		
+					String FullTrade = ( "!additem( " + Usr + " wants " + Item1 + " for " + Item2 + " );");		
 					Server1.ItemWriter(FullTrade); // passed to server to pass to item
+					TRADE_OBJ1.requestFocus();
+					TRADE_OBJ2.requestFocus();
+					TRADE_OBJ1.setText("");
+					TRADE_OBJ2.setText("");
 				}
 			}
 			
@@ -339,6 +347,7 @@ public class GUI
 			{ 
 				Usr = TF_UsernameBox.getText().trim(); // set user to what is entered
 				L_LoggedInAsBox.setText(Usr);		// show their name on window
+				
 				Server1.Users.add(Usr);				// adds user to jlist when logged in
 				main.setTitle(Usr + "'s chat");		// change  windows jlabel to show their name
 				LoginWindow.setVisible(false);
