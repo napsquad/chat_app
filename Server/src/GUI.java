@@ -131,7 +131,7 @@ public class GUI
 			
 			B_ABOUT.setText("ABOUT");
 			main.getContentPane().add(B_ABOUT);
-			B_ABOUT.setBounds(340,40,110,25);
+			B_ABOUT.setBounds(340,40,80,25);
 			
 			L_MESSAGE.setText("MESSAGE : ");
 			main.getContentPane().add(L_MESSAGE);
@@ -331,7 +331,7 @@ public class GUI
 						}
 				else
 				{
-					String FullTrade = ( "!additem( " + Usr + " wants " + Item1 + " for " + Item2 + " );");		
+					String FullTrade = ("!additem" + Usr + " wants " + Item1 + " for " + Item2 + " );");		
 					Server1.ItemWriter(FullTrade); // passed to server to pass to item
 					TRADE_OBJ1.requestFocus();
 					TRADE_OBJ2.requestFocus();
