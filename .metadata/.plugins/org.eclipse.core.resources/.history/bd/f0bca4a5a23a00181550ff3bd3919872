@@ -1,0 +1,29 @@
+package Message_Objs;
+
+public class Message_obj extends Generic_Object{
+
+	String contents;
+	boolean trade;
+
+	public Message_obj()
+	{
+
+	}
+	
+	public Message_obj(boolean u, String v, String w, String x)
+	{
+		   trade = u;
+		   contents = v;
+		   super.IP = w;
+		   super.name = x;
+
+	}
+	
+	public String get_contents() {
+		return contents;
+	}
+	public boolean get_bool()
+	{
+		return trade;
+	}
+}

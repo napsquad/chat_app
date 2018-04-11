@@ -1,0 +1,7 @@
+package Message_Objs;
+
+import java.io.Serializable;
+
+public class Conglomp implements Serializable {
+		public String
+}

@@ -1,0 +1,20 @@
+
+public class Generic_Object {
+	
+	public int IP;
+	public String name;
+	public String Sender;
+	public String Reciever;
+
+    // four constructors 
+	public Generic_Object() {
+    
+ }
+    public Generic_Object(int w, String x, String y, String z) {
+       IP = w;
+       name = x;
+       Sender = y;
+       Reciever = z;
+    }
+    
+}

@@ -1,0 +1,15 @@
+package Message_Objs;
+
+import java.io.Serializable;
+
+public class Conglomp implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1719744727854676730L;
+		public String type;
+		public String s1;
+		public String s2;
+		public String name;
+}

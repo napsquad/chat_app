@@ -1,0 +1,24 @@
+package Message_Objs;
+
+import java.net.Socket;
+
+public class data_object extends Generic_Object{
+	
+	public String Want_Obj;
+	public String Have_Obj;
+	
+	public data_object()
+	{
+
+	}
+	public data_object(String have, String want, Socket sock, String nam)
+	{
+		   super.IP = sock;
+		   super.name = nam;
+		   Have_Obj = have;
+		   Want_Obj = want;
+	}
+	
+	
+	
+}

@@ -1,0 +1,34 @@
+package Message_Objs;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
+public class Connect_Object extends Generic_Object{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4694450520972116359L;
+	Socket sock;
+	String username;
+	String password;
+	boolean connect;
+	
+	public Connect_Object()
+	{
+
+	}
+	public Connect_Object(boolean stats, String myuser,String secret, Socket mySock, String myName)
+	{
+		   connect = stats;
+		   username = myuser;
+		   password = secret;
+		   super.IP = mySock;
+		   super.name = myName;
+
+	}
+	public boolean disconn()
+	{
+		return connect;
+	}
+}

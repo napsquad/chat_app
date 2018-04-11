@@ -1,0 +1,24 @@
+package Message_Objs;
+
+public class data_object extends Generic_Object{
+	
+	String Want_Obj;
+	String Have_Obj;
+	
+	data_object()
+	{
+
+	}
+	data_object(String u,String v, int w, String x, String y, String z)
+	{
+		   super.IP = w;
+		   super.name = x;
+		   super.Sender = y;
+		   super.Reciever = z;
+		   Have_Obj = u;
+		   Want_Obj = v;
+	}
+	
+	
+	
+}

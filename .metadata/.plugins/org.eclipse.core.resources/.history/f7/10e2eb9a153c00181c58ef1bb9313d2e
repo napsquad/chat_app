@@ -1,0 +1,22 @@
+package Message_Objs;
+import java.io.Serializable;
+import java.net.*;
+public class Generic_Object implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public String IP;
+	public String name;
+
+    // four constructors 
+	public Generic_Object() {
+    
+ }
+    public Generic_Object(Socket w, String x) {
+       IP = w;
+       name = x;
+    }
+    
+}

@@ -1,0 +1,31 @@
+package Message_Objs;
+
+import java.net.Socket;
+
+public class Message_obj extends Generic_Object{
+
+	String contents;
+	boolean trade;
+
+	public Message_obj()
+	{
+
+	}
+	
+	public Message_obj(boolean trad, String cont, Socket sook, String myname)
+	{
+		   trade = trad;
+		   contents = cont;
+		   super.IP = sook;
+		   super.name = myname;
+
+	}
+	
+	public String get_contents() {
+		return contents;
+	}
+	public boolean get_bool()
+	{
+		return trade;
+	}
+}

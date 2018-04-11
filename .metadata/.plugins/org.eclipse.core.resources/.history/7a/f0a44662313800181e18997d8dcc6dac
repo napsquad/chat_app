@@ -1,0 +1,26 @@
+package Message_Objs;
+
+public class Connect_Object extends Generic_Object{
+
+	String socket;
+	String username;
+	String password;
+	boolean connect;
+	
+	public Connect_Object()
+	{
+
+	}
+	public Connect_Object(boolean s, String t, String u,String v, int w, String x, String y, String z)
+	{
+		   connect = s;
+		   socket = t;
+		   username = u;
+		   password = v;
+		   super.IP = w;
+		   super.name = x;
+		   super.Sender = y;
+		   super.Reciever = z;
+
+	}
+}

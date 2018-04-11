@@ -1,0 +1,25 @@
+package Message_Objs;
+
+import java.net.Socket;
+
+public class Search_obj extends Generic_Object {
+
+	int time_since;
+	public static String have_search;
+	public String want_search;
+	public Search_obj()
+	{
+
+	}
+	
+	public Search_obj(int t, String u,String v, Socket w, String x)
+	{
+		   time_since = t;
+		   have_search = u;
+		   want_search = v;
+		   super.IP = w;
+		   super.name = x;
+
+	}
+	
+}

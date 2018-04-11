@@ -1,0 +1,2 @@
+!additemtest1 wants SHOES1 for SHOES2 );
+!additemtest1 wants hello for memes );

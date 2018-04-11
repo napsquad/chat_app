@@ -2,6 +2,10 @@ import java.io.*;
 import java.net.*;
 import javax.swing.*;
 
+import Message_Objs.Conglomp;
+import Message_Objs.Message_obj;
+import Message_Objs.data_object;
+
 public class GUI 
 {
 		//globals
@@ -80,23 +84,21 @@ public class GUI
 		{
 			try {
 				
-				final int PORT = 9002;
+				final int PORT = 9003;
 				final String HOST = "localhost"; // can be domain name or ip
 				
 				Socket SOCK = new Socket(HOST,PORT);
-				System.out.println("you are connected to" + HOST);
+				System.out.println("you are connected to " + HOST);
 				
 				chat = new Client1(SOCK); // still need to build the constructor for the client
 				
-				PrintWriter OUT  = new PrintWriter(SOCK.getOutputStream());
-				OUT.println(Usr); // send users name
-				OUT.flush(); // flush stream
-				
 				Thread X = new Thread(chat); // building thread 
 				X.start();
+				System.out.println("created thread");
 			}
 			catch(Exception X)
 			{
+				X.getStackTrace();
 				System.out.print(X);
 				JOptionPane.showMessageDialog(null, "the server is not responding");
 				System.exit(0);
@@ -125,7 +127,7 @@ public class GUI
 			main.getContentPane().add(B_CONNECT);
 			B_CONNECT.setBounds(120,40,110,25);
 			
-			B_HELP.setText("HELP");
+			B_HELP.setText("SEARCH");
 			main.getContentPane().add(B_HELP);
 			B_HELP.setBounds(420,40,75,25);
 			
@@ -280,6 +282,36 @@ public class GUI
 			 
 			TRADE_WINDOW.setVisible(true);
 		}
+		public static void BUILD_SEARCH_WINDOW()
+		{
+			TRADE_WINDOW.setTitle("FIND ITEMS");
+			SUBMIT_TRADE.setText("SEARCH");
+			
+			TRADE_WINDOW.setSize(400,125);
+			TRADE_WINDOW.setLocation(250,200);
+			TRADE_WINDOW.setResizable(false);
+			TRADE_WINDOW.add(ITEM1);
+			ITEM1.setBounds(35,10,150,20);
+			TRADE_WINDOW.add(ITEM2);
+			ITEM2.setBounds(305,10,150,20);
+			
+			TRADE_WINDOW.getContentPane().add(TRADE_OBJ1);
+			TRADE_WINDOW.getContentPane().add(TRADE_OBJ2);
+			TRADE_OBJ1.setBounds(0,35,150,50);
+			TRADE_OBJ2.setBounds(250,35,150,50);
+			TRADE_WINDOW.add(T_ADD);
+			
+			
+			 JPanel Submit_control = new JPanel();
+			 Submit_control.add(SUBMIT_TRADE);
+			 
+			TRADE_WINDOW.add(Submit_control);
+			Submit_control.setBounds(200,200,75,100);
+
+				Item_Action();
+			 
+			TRADE_WINDOW.setVisible(true);
+		}
 		
 		
 		
@@ -296,6 +328,8 @@ public class GUI
 				}
 			);
 		}
+		
+		
 		public static void Item_Action()
 		{
 			SUBMIT_TRADE.addActionListener
@@ -303,12 +337,18 @@ public class GUI
 				new java.awt.event.ActionListener()
 				{
 					public void actionPerformed(java.awt.event.ActionEvent evt)
-					{try {
+					{
+						
+						try 
+					{
 						SUBMIT_ITEM();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
+					} 
+					catch (IOException e)
+					{
 						e.printStackTrace();
-					}}
+					}
+						
+					}
 				}
 			);
 		}
@@ -324,22 +364,28 @@ public class GUI
 						{
 					JOptionPane.showMessageDialog(null, "One or more item contains non-alphanumeric characters or are too long, please "
 							+ "revise entries and resubmit");
-					TRADE_OBJ1.requestFocus();
-					TRADE_OBJ2.requestFocus();
-					TRADE_OBJ1.setText("");
-					TRADE_OBJ2.setText("");
+					TRADE_OBJ1.requestFocus();// puts pointer back in text box
+					TRADE_OBJ2.requestFocus();// ''
+					TRADE_OBJ1.setText(""); // sets fields equal to null
+					TRADE_OBJ2.setText("");// ''
 						}
 				else
 				{
-					String FullTrade = ("!additem" + Usr + " wants " + Item1 + " for " + Item2 + " );");		
-					Server1.ItemWriter(FullTrade); // passed to server to pass to item
-					TRADE_OBJ1.requestFocus();
-					TRADE_OBJ2.requestFocus();
-					TRADE_OBJ1.setText("");
-					TRADE_OBJ2.setText("");
+					//String FullTrade = ("!additem " + Usr + " wants " + Item1 + " for " + Item2 + " );");
+					
+					
+					Conglomp Trade = new Conglomp("trade", Item1,Item2,Usr);
+					
+					Client1.OUT.writeObject(Trade); // passed to server to pass to item
+					
+					
+					TRADE_OBJ1.requestFocus();// puts pointer back in text box
+					TRADE_OBJ2.requestFocus();// ''
+					TRADE_OBJ1.setText(""); // sets fields equal to null
+					TRADE_OBJ2.setText("");// ''
 				}
 			}
-			
+		
 		}
 		public static void ACTION_B_ENTER() 
 		{
@@ -371,7 +417,17 @@ public class GUI
 					new java.awt.event.ActionListener()
 					{
 						public void actionPerformed(java.awt.event.ActionEvent evt)
-						{ ACTION_B_SEND(); }	// binds send action to send button
+						{ 
+							try 
+						{
+							ACTION_B_SEND();
+						} 
+						catch (IOException e) 
+						{
+							e.printStackTrace();
+						} 
+						
+						}
 					}
 			);
 			B_DISCONNECT.addActionListener( 
@@ -392,7 +448,7 @@ public class GUI
 					new java.awt.event.ActionListener()
 					{
 						public void actionPerformed(java.awt.event.ActionEvent evt)
-						{ ACTION_B_HELP(); }	// binds opening help window to help button
+						{ BUILD_SEARCH_WINDOW(); }	// binds opening help window to help button
 					} 
 			);
 			B_ABOUT.addActionListener( 
@@ -413,10 +469,13 @@ public class GUI
 //--------------------------------------main window button defs end---------------------------------------------
 	
 //---------------------------------------Button action methods--------------------------------------------------
-		public static void ACTION_B_SEND()
+		public static void ACTION_B_SEND() throws IOException
 		{
-			if(!TF_MESSAGE.getText().equals("")){
-				chat.SEND(TF_MESSAGE.getText()); // send method from CLient1
+			if(!TF_MESSAGE.getText().equals(""))
+			{
+				String test = TF_MESSAGE.getText();
+				Conglomp x = new Conglomp("message", test,"talk",Usr);
+				chat.SENDI(x); // send method from CLient1
 				TF_MESSAGE.requestFocus(); // after send, focus goes to button
 				// we bring it back using requestFocus
 			}
@@ -429,7 +488,7 @@ public class GUI
 			}
 			catch(Exception Y ) { Y.printStackTrace(); }
 		}
-		public static void ACTION_B_HELP()
+		public void ACTION_B_HELP()
 		{
 			JOptionPane.showMessageDialog(null, "Each items must both be below 75 character individually and only contain Alphanumeric"
 					+ "characters");

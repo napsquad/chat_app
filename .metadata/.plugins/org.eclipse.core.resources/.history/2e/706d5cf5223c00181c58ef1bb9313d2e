@@ -1,0 +1,30 @@
+package Message_Objs;
+
+import java.io.Serializable;
+
+
+public class Search_obj extends Generic_Object implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -791952269386229514L;
+	int time_since;
+	public static String have_search;
+	public String want_search;
+	public Search_obj()
+	{
+
+	}
+	
+	public Search_obj(int t, String u,String v, String w, String x)
+	{
+		   time_since = t;
+		   have_search = u;
+		   want_search = v;
+		   super.IP = w;
+		   super.name = x;
+
+	}
+	
+}

@@ -1,0 +1,23 @@
+package Message_Objs;
+
+public class Search_obj extends Generic_Object {
+
+	int time_since;
+	String have_search;
+	String want_search;
+	public Search_obj()
+	{
+
+	}
+	
+	public Search_obj(int t, String u,String v, String w, String x)
+	{
+		   time_since = t;
+		   have_search = u;
+		   want_search = v;
+		   super.IP = w;
+		   super.name = x;
+
+	}
+	
+}

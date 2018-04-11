@@ -1,0 +1,18 @@
+package Message_Objs;
+import java.io.Serializable;
+
+public class Generic_Object implements Serializable{
+	
+	public String IP;
+	public String name;
+
+    // four constructors 
+	public Generic_Object() {
+    
+ }
+    public Generic_Object(String w, String x) {
+       IP = w;
+       name = x;
+    }
+    
+}

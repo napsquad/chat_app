@@ -1,0 +1,19 @@
+package Message_Objs;
+
+public class Generic_Object {
+	
+	public int IP;
+	public String name;
+	public String Sender;
+	public String Reciever;
+
+    // four constructors 
+	public Generic_Object() {
+    
+ }
+    public Generic_Object(int w, String x) {
+       IP = w;
+       name = x;
+    }
+    
+}

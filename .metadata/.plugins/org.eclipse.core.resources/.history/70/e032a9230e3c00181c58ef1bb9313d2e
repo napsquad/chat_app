@@ -1,0 +1,176 @@
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import Message_Objs.*;
+
+public class Client1 implements Runnable, Serializable
+{
+	//globals
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4220256892269154006L; // serialized for sending
+	
+	public static Socket SOCK; // makes the socket persist, global makes sure socket doesn't delete itself
+	public ObjectInputStream INPUT; // defined for later use in order to read objects
+	public static ObjectOutputStream OUT; // defined for later use in thread for sending Objects
+	
+	Scanner SEND = new Scanner(System.in); // just used to set username in window
+	
+	public Client1(Socket X) throws IOException
+	{
+		Client1.SOCK = X;// constructs socket for the client
+	}
+	
+	
+	public void run() // this is the thread that we  are going to run
+	{
+		try 
+		{
+			INPUT = new ObjectInputStream(SOCK.getInputStream()); // stream to read objects
+		} 
+		catch (IOException e2) 
+		{
+			e2.printStackTrace(); // catch error if there is no stream
+		}
+		
+		try 
+		{
+			OUT = new ObjectOutputStream(SOCK.getOutputStream()); // stream to write objects
+		} 
+		catch (IOException e1) 
+		{
+			e1.printStackTrace(); // catch error if there is no stream
+		}
+				
+		try 
+		{	
+			OUT.flush();	 
+		}
+		catch (IOException e) 
+		{		
+			e.printStackTrace();
+		} 
+				
+				
+		Connect_Object addme = new Connect_Object(true,SOCK, GUI.Usr); // say that we are connecting, as Usr with the right SOCK
+		System.out.println("before conn flush " + addme.name);
+				
+				try 
+				{
+					OUT.writeObject(addme);
+					OUT.flush();
+				} 
+				catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} // put object in buffer to later send it
+				
+				
+				try 
+				{
+					CheckStream(); // always checks for new input from users
+				}
+				catch (ClassNotFoundException e) 
+				{
+					e.printStackTrace();
+				}
+				catch (IOException e) 
+				{
+					e.printStackTrace();
+				} 
+		
+		
+		
+	}
+	
+	
+	public void CheckStream() throws ClassNotFoundException, IOException
+	{
+		while(true)
+		{
+			RECIEVE(); // when we get an object, use recieve
+		}
+	}
+	
+	
+	public void RECIEVE() throws ClassNotFoundException, IOException
+	{
+		if(INPUT.readObject() != null)
+		{
+
+			if( INPUT.readObject() instanceof Message_obj) // checks if object is a message object
+			{
+				
+				Message_obj message = (Message_obj) INPUT.readObject(); //  cast object as a message object
+				
+				if(message.get_bool() == true) //is it trade data?
+				{
+				GUI.TA_CONVERSATION.append(message.get_contents()); // yes, print to trade window
+				}
+				else 
+				{
+					GUI.TRADE_POST_AREA.append(message.get_contents()); // no, its a conversation
+				}
+				
+			}
+			else if(INPUT.readObject() instanceof Search_obj) // checks if object is a search request
+			{
+				Search_obj search = (Search_obj) INPUT.readObject();
+				GUI.TA_CONVERSATION.append("got search packet from" + search.name);
+			}
+			else if(INPUT.readObject() instanceof data_object) // checks if object is a trade input
+			{
+				data_object trayd = (data_object) INPUT.readObject();
+				GUI.TA_CONVERSATION.append("request for" + trayd.Have_Obj);
+			}
+			else if(INPUT.readObject() instanceof Connect_Object) // checks if object is a connection object
+			{
+				Connect_Object DeeCee = (Connect_Object) INPUT.readObject();
+				GUI.TA_CONVERSATION.append("someones trying to connect:  " + DeeCee.name + " , wonder what they want" );
+			}
+			else if(INPUT.readObject() instanceof Generic_Object) // checks if object is a generic obj
+			{
+				Generic_Object genny = (Generic_Object) INPUT.readObject();
+				GUI.TA_CONVERSATION.append("i guess " + genny.name + " wants to talk" );
+			}
+			else if(INPUT.readObject() == null)
+			{
+				System.out.println("error on object read);
+			}
+		}
+		
+	}
+	
+	
+	public void DISCONNECT() throws IOException
+	{
+		ObjectOutputStream KillMe = new ObjectOutputStream(SOCK.getOutputStream()); // make temp output to server return
+		Connect_Object DC  = new Connect_Object(false,SOCK, GUI.Usr); // create disconnect object
+		KillMe.writeObject(DC); 			// put disconnect object into stream
+		KillMe.flush();					// flush the disconnect object
+		System.out.println("should not be null : " + KillMe); // just checking to make sure that the stream exists 
+		SOCK.close();		// close the socket
+		System.exit(0);		// close the GUI
+		
+		
+	}
+	
+	
+	public static void SEND (Message_obj x) throws IOException
+	{
+		ObjectOutputStream Msg_Out = new ObjectOutputStream(SOCK.getOutputStream()); // redefine temp socket whenever called
+		
+		System.out.println("before out " + x.get_contents()); // making sure the object has the proper fields
+		System.out.println("shouldnt be null: " + Msg_Out); // making sure the stream isnt null
+		
+		Msg_Out.writeObject(x); // write our object out
+		Msg_Out.flush(); // send the object to the server
+		
+		GUI.TF_MESSAGE.setText(""); // sets text field to null after send
+	}
+	
+	
+}

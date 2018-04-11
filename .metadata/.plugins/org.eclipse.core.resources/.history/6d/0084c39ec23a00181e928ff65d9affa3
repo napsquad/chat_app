@@ -1,0 +1,18 @@
+package Message_Objs;
+import java.io.Serializable;
+import java.net.*;
+public class person_obj implements Serializable{
+	public String name;
+	public Socket sock;
+	
+	person_obj()
+	{
+		name = "default";
+	}
+	person_obj(String n, Socket x)
+	{
+		name = n;
+		sock = x;
+	}
+	
+}
